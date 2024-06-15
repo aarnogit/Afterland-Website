@@ -1,7 +1,9 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
+import { useInView } from "framer-motion";
 import { memo, useMemo, useRef } from "react";
 import ReactTypingEffect from "react-typing-effect";
-import { useInView } from "framer-motion";
 
 const texts = [
   "Connected",
@@ -13,9 +15,9 @@ const texts = [
 
 const MHomeSection = () => {
   const typingREF = useRef(null);
-  const isVisible = useInView(typingREF);
+  //   const isVisible = useInView(typingREF);
 
-  console.log(isVisible);
+  //   console.log(isVisible);
   const text = useMemo(
     () => (
       <ReactTypingEffect
@@ -36,7 +38,7 @@ const MHomeSection = () => {
         ref={typingREF}
         className="text-xl font-medium max-w-sm drop-shadow shadow-white"
       >
-        The first ever {isVisible ? text : ""} <br />
+        The first ever {text ?? ""} <br />
         restake roll up L2 for RWAs
       </h6>
 
