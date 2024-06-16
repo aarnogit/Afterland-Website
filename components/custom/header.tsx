@@ -1,14 +1,10 @@
 "use client";
-import React, { Dispatch, FC, SetStateAction, useState } from "react";
-import styles from "./Header.module.scss";
-import Image from "next/image";
-import Link from "next/link";
-import { useVBlockStore, useVideoStore } from "@/stores/video.store";
-import Logo from "./logo";
 import { Button } from "../ui/button";
+import BMenu from "./burger-menu";
+import Logo from "./logo";
 
 const menu_data = [
-  "home",
+  "HOME",
   "ABOUT",
   "FEATURES",
   "ROADMAP",
@@ -18,24 +14,19 @@ const menu_data = [
 
 const Header = () => {
   return (
-    <header className="bg-slate-950 lg:bg-transparent flex justify-between items-center h-20 sticky top-0 w-full z-20">
+    <header className="bg-black/60 backdrop-blur-md flex justify-between items-center h-20 fixed top-0 left-1/2 -translate-x-1/2 container w-full z-20">
       <Logo />
-      <div className="hidden lg:flex justify-between items-center w-max gap-5">
+      <div className="hidden md:flex justify-between items-center w-max md:gap-2.5 xl:gap-5">
         {menu_data.map((item, index) => (
           <Button
             href={`#${item.toLocaleLowerCase()}`}
+            size="sm"
             variant={menu_data.length === index + 1 ? "glass" : "ghost"}
             className={`font-semibold uppercase text-xs sm:text-sm ${
               menu_data.length === index + 1
                 ? "border border-blue-800/35 shadow shadow-blue-950"
                 : "text-slate-200 hover:text-white/95 hover:bg-black/40 backdrop-blur-md duration-500 transition-colors"
             }`}
-            // style={{
-            //   boxShadow:
-            //     menu_data.length === index + 1
-            //       ? "0px 0px 7.7px 1px #8a94f257, 0px 0px 8px 0px #7588e9cc inset"
-            //       : "",
-            // }}
             key={`header-navigation--${item}`}
           >
             {item}
@@ -43,11 +34,9 @@ const Header = () => {
         ))}
       </div>
 
-      {/* <MobileBurger
-          openMenu={openMenu}
-          setOpenMenu={setOpenMenu}
-          handleNavigate={handleNavigate}
-        /> */}
+      <div className="flex md:hidden">
+        <BMenu />
+      </div>
     </header>
   );
 };

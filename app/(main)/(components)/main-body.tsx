@@ -1,19 +1,21 @@
-"use client";
-
-import { useIsMounted } from "usehooks-ts";
 import MAboutSection from "./main-about.section";
+import MFeaturesSection from "./main-features.section";
+import MSFeaturesSection from "./main-subfeatures.section";
 import MHomeSection from "./main-home.section";
-import MVideo from "./main-video";
-import { Suspense } from "react";
+import MRoadmapSection from "./main-roadmap.section";
+import MPartners from "./main-partners";
+import Footer from "@/components/custom/footer";
 
 function MainBody() {
   return (
-    <div className="flex flex-col h-[2200dvh] relative">
-      <Suspense fallback="loading..">
-        <MVideo fileName="/lumia.mp4" />
-      </Suspense>
+    <div className="flex flex-col relative">
       <MHomeSection />
       <MAboutSection />
+      <MFeaturesSection />
+      <MSFeaturesSection />
+      <MRoadmapSection />
+      <MPartners />
+      <Footer />
     </div>
   );
 }

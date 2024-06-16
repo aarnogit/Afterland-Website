@@ -111,6 +111,40 @@ body {
   display: none;
 }
 
-html {
+
+body {
+  background: #000;
+}
+
+html,
+body {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.body-container {
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 100vh;
   scroll-snap-type: y mandatory;
+}
+
+
+section {
+  height: 100vh;
+  position: relative;
+}
+
+.body-container section {
+  scroll-snap-align: start;
+}
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #9780F5 0%, #12086B 100%);
+  transform-origin: 0%;
 }

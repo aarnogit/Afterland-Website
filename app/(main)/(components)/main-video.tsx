@@ -1,67 +1,64 @@
 "use client";
 
+import { useInView, motion } from "framer-motion";
 import { useEffect, useRef } from "react";
-import { useDebounceCallback } from "usehooks-ts";
-import { useMotionValueEvent, useScroll, useTransform } from "framer-motion";
+import { useMediaQuery } from "usehooks-ts";
 
-const frames = 966;
-
-function MVideo({ fileName }: { fileName: string }) {
+const MVideo = ({
+  filepath,
+  className = "",
+  videoClassName = "",
+}: {
+  filepath: string;
+  className?: string;
+  videoClassName?: string;
+}) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const scrollSectionRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll();
+  const isMobile = useMediaQuery("(max-width:720px)");
 
-  const handleFrame = useDebounceCallback((progress) => {
-    console.log(progress);
-    if (videoRef.current) {
-      videoRef.current.currentTime = videoRef.current.duration * progress;
-    }
-  }, 5);
+  const ref = useRef(null);
 
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    handleFrame(latest);
+  const inView = useInView(ref, {
+    once: false,
   });
 
-  useTransform(scrollYProgress, [0, 1], [0, frames]);
-
   useEffect(() => {
-    const video = videoRef.current!;
-
-    const handleLoadedMetadata = () => {
-      if (scrollSectionRef.current) {
-        const duration = video.duration;
-        scrollSectionRef.current.style.height = `${
-          Math.floor(duration) * frames
-        }px`;
+    if (videoRef.current) {
+      if (inView) {
+        videoRef.current.play();
+      } else {
+        videoRef.current.currentTime = 0;
       }
-    };
-
-    if (video) {
-      video.addEventListener("loadedmetadata", handleLoadedMetadata);
     }
+  }, [inView]);
 
-    return () => {
-      if (video) {
-        video.removeEventListener("loadedmetadata", handleLoadedMetadata);
-      }
-    };
-  }, []);
+  const initial = { opacity: 0, scale: isMobile ? 1 : 0 };
+  const animate = {
+    opacity: inView ? 1 : 0,
+    scale: isMobile ? 1 : inView ? 1 : 0,
+  };
 
   return (
-    <>
+    <motion.div
+      ref={ref}
+      initial={initial}
+      animate={animate}
+      transition={{ duration: 0.7 }}
+      className={`${className} -order-5 md:order-none w-full md:max-w-4xl h-[50dvh] md:h-full flex justify-center items-center relative video-container -z-50`}
+    >
       <video
-        muted
         ref={videoRef}
-        className="h-dvh object-cover fixed inset-0 w-full -z-50"
+        className={`w-[700px] md:w-full max-w-[700px] md:max-w-3xl absolute right-0 top-1/2 -translate-y-1/2 -z-50 ${videoClassName}`}
         preload="metadata"
-        aria-label="Video player"
+        muted
+        playsInline
+        loop
+        autoPlay
       >
-        <source src={fileName} type="video/mp4" />
-        Your browser does not support the video tag.
+        <source src={filepath} type="video/mp4" />
       </video>
-
-      <div ref={scrollSectionRef} className="block" />
-    </>
+    </motion.div>
   );
-}
+};
+
 export default MVideo;
