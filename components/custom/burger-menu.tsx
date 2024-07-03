@@ -11,15 +11,7 @@ import {
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-
-const menu_data = [
-  "HOME",
-  "ABOUT",
-  "FEATURES",
-  "ROADMAP",
-  "PARTNERS",
-  "AIRDROP",
-];
+import { header_menu_data } from "@/lib/constants";
 
 const BMenu = () => {
   const [open, setOpen] = useState(false);
@@ -30,16 +22,15 @@ const BMenu = () => {
       </DrawerTrigger>
       <DrawerContent>
         <div className="flex flex-col justify-between items-center min-h-96 py-10 px-5">
-          {menu_data.map((item, index) => (
+          {header_menu_data.map((item) => (
             <Button
               href={`#${item.toLocaleLowerCase()}`}
               size="sm"
-              variant="outline"
               onClick={() => setOpen(false)}
-              className={`font-semibold uppercase text-xs sm:text-sm w-full`}
+              className={`font-bold text-xs sm:text-sm`}
               key={`header-navigation--${item}`}
             >
-              {item}
+              {item.toLocaleLowerCase()}
             </Button>
           ))}
         </div>

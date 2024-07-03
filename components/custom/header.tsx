@@ -1,37 +1,41 @@
 "use client";
+import { header_menu_data } from "@/lib/constants";
 import { Button } from "../ui/button";
 import BMenu from "./burger-menu";
 import Logo from "./logo";
-
-const menu_data = [
-  "HOME",
-  "ABOUT",
-  "FEATURES",
-  "ROADMAP",
-  "PARTNERS",
-  "AIRDROP",
-];
+import { PlusIcon } from "lucide-react";
 
 const Header = () => {
   return (
-    <header className="bg-black/60 backdrop-blur-md flex justify-between items-center h-20 fixed top-0 left-1/2 -translate-x-1/2 container w-full z-20">
-      <Logo />
-      <div className="hidden md:flex justify-between items-center w-max md:gap-2.5 xl:gap-5">
-        {menu_data.map((item, index) => (
+    <header className="flex flex-nowrap justify-between items-center w-full py-3.5 px-5 border-t-2 border-l-2 border-[#576E6F] relative">
+      <div className="pl-14 relative">
+        <Logo />
+      </div>
+      <div className="relative hidden md:flex justify-between items-center w-max md:gap-5 xl:gap-10 pr-10">
+        {header_menu_data.map((item) => (
           <Button
-            href={`#${item.toLocaleLowerCase()}`}
+            variant="pluses"
             size="sm"
-            variant={menu_data.length === index + 1 ? "glass" : "ghost"}
-            className={`font-semibold uppercase text-xs sm:text-sm ${
-              menu_data.length === index + 1
-                ? "border border-blue-800/35 shadow shadow-blue-950"
-                : "text-slate-200 hover:text-white/95 hover:bg-black/40 backdrop-blur-md duration-500 transition-colors"
-            }`}
+            className="relative text-xl "
             key={`header-navigation--${item}`}
           >
-            {item}
+            <PlusIcon className="w-3 h-3 text-white/30 absolute -top-3 -left-3" />
+            <PlusIcon className="w-3 h-3 text-white/30 absolute -top-3 -right-3" />
+            <PlusIcon className="w-3 h-3 text-white/30 absolute -bottom-3 -left-3" />
+            <PlusIcon className="w-3 h-3 text-white/30 absolute -bottom-3 -right-3" />
+            <span>:{item.toLocaleLowerCase()}:</span>
           </Button>
         ))}
+        <Button
+          size="sm"
+          className="rounded-none w-48 h-10 text-xl justify-start px-10 text-left"
+          onClick={(e) => console.log("click!")}
+        >
+          <span aria-hidden className="button-primary-glitch">
+            :PLAY_:
+          </span>
+          PLAY
+        </Button>
       </div>
 
       <div className="flex md:hidden">

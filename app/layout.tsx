@@ -1,14 +1,12 @@
 import Header from "@/components/custom/header";
 import { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import MBackground from "./(main)/(components)/main-background";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Lumia",
-  description: "Lumia",
+  title: "AFTERLAND",
+  description: "AFTERLAND",
 };
-
-const font = Montserrat({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
@@ -17,12 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning suppressContentEditableWarning>
-      <body
-        className={font.className}
-        suppressHydrationWarning
-        suppressContentEditableWarning
-      >
-        <div className="flex flex-col container body-container">
+      <body suppressHydrationWarning suppressContentEditableWarning>
+        <MBackground />
+        <div className="flex flex-col p-10 min-h-dvh h-full">
           <Header />
           {children}
         </div>
