@@ -17,7 +17,7 @@ function MainBody() {
         }}
       >
         <p className="text-3xl font-bold uppercase">
-          // running afterland soft 0898.4356.6432.3432
+          {"// running afterland soft 0898.4356.6432.3432"}
         </p>
 
         <ul className="flex flex-col gap-5">
@@ -31,7 +31,7 @@ function MainBody() {
             WRITE YOUR NICKNAME
           </li>
           <li className="text-sm font-medium text-white">
-            // BIG FAT CYBER PUNK COW
+            {"// BIG FAT CYBER PUNK COW"}
           </li>
           <li className="text-sm font-medium text-[#8E8E8E]">
             LET’s START THIS COMPETITION
