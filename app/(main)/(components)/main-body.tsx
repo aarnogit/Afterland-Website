@@ -83,14 +83,14 @@ function MainBody() {
               } flex-col gap-10 transition-all duration-1000 absolute left-0 bottom-0`}
             >
               <ul className="cyberpunk space-y-3.5">
-                <li className="text-xs xl:text-lg 2xl:text-xl font-medium text-[#8E8E8E]">
+                <li className="text-xs xl:text-lg font-medium text-[#8E8E8E]">
                   Welcome to Afterland, an immersive play-to-earn experience set
                   in a post-apocalyptic cyberpunk world.
                 </li>
-                <li className="text-xs xl:text-lg 2xl:text-xl font-medium text-[#8E8E8E]">
+                <li className="text-xs xl:text-lg font-medium text-[#8E8E8E]">
                   Developed within the Telegram Web App on the TON blockchain.
                 </li>
-                <li className="text-xs xl:text-lg 2xl:text-xl font-medium text-[#8E8E8E]">
+                <li className="text-xs xl:text-lg font-medium text-[#8E8E8E]">
                   Afterland offers a unique fusion of farming simulation and
                   sci-fi adventure.
                 </li>
