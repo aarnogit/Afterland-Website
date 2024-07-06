@@ -30,7 +30,8 @@
     "app/subpage/apple-body.jsx",
     "lib/hooks/useLax.jsx",
     "lib/lax.js",
-    "lib/laxPresets.js"
+    "lib/laxPresets.js",
+    "app/(main)/(components)/shadered-moo.jsx"
   ],
   "exclude": ["node_modules"]
 }

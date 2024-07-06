@@ -15,9 +15,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning suppressContentEditableWarning>
-      <body suppressHydrationWarning suppressContentEditableWarning>
+      <body
+        suppressHydrationWarning
+        suppressContentEditableWarning
+        className="overflow-hidden"
+      >
         <MBackground />
-        <div className="flex flex-col p-10 min-h-dvh h-full">
+        <div className="flex flex-col px-2.5 md:px-5 2xl:px-10 py-3 md:py-5 2xl:py-10 min-h-dvh h-full">
           <Header />
           {children}
         </div>

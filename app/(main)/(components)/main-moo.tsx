@@ -1,8 +1,9 @@
-import { useGLTF, useMatcapTexture } from "@react-three/drei";
+import { MeshTransmissionMaterial, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { GLTF } from "three-stdlib";
+import { useMediaQuery } from "usehooks-ts";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -15,12 +16,14 @@ type GLTFResult = GLTF & {
 
 export function MainMoo(props: JSX.IntrinsicElements["group"]) {
   const mouse = useRef(new THREE.Vector2());
-  const [matcap] = useMatcapTexture("1D3FCC_051B5F_81A0F2_5579E9");
   const model = useRef<any>(null);
 
-  const { nodes, materials } = useGLTF("/korova.glb") as GLTFResult;
+  const { nodes } = useGLTF("/model/korova.glb") as GLTFResult;
+  const isSmall = useMediaQuery("(max-width:735px)");
 
   useEffect(() => {
+    if (isSmall) return;
+
     const handleMouseMove = (event: any) => {
       mouse.current.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse.current.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -34,31 +37,45 @@ export function MainMoo(props: JSX.IntrinsicElements["group"]) {
   }, []);
 
   useFrame((state) => {
-    if (model.current) {
+    if (model.current && !isSmall) {
       const { x, y } = mouse.current;
+
       const vector = new THREE.Vector3(x, y, 0.5).unproject(state.camera);
+
       const dir = vector.sub(state.camera.position).normalize();
       const distance = -state.camera.position.z / dir.z;
       const pos = state.camera.position
         .clone()
         .add(dir.multiplyScalar(distance));
-
-      model.current.lookAt(pos);
+      setTimeout(model.current.lookAt(pos), 50);
     }
   });
+
   return (
-    <group {...props} ref={model} dispose={null} rotation-x={Math.PI / 2}>
+    <group
+      {...props}
+      ref={model}
+      dispose={null}
+      rotation-x={isSmall ? null : Math.PI / 2}
+    >
       <mesh
-        castShadow
-        receiveShadow
         geometry={nodes.korova3_ZBrushPolyMesh3D_1.geometry}
-        // material={materials.korova4}
-        scale={0.25}
+        scale={isSmall ? 0.15 : 0.3}
       >
-        <meshMatcapMaterial matcap={matcap} />
+        <MeshTransmissionMaterial
+          color={"#15FAF8"}
+          transmission={1}
+          metalness={0.2}
+          roughness={0.01}
+          ior={1.2}
+          chromaticAberration={0.02}
+          backside
+          // backsideThickness={6}
+          thickness={1}
+        />
       </mesh>
     </group>
   );
 }
 
-useGLTF.preload("/korova.glb");
+useGLTF.preload("/model/korova.glb");

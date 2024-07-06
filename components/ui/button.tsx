@@ -6,12 +6,13 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl",
   {
     variants: {
       variant: {
-        primary: "text-white button-primary",
-        pluses: "button-pluses",
+        primary: "text-white button-primary h-7 lg:h-10 xl:h-14 2xl:h-16",
+        pluses: "button-pluses h-max",
+        invisible: "",
       },
       size: {
         default: "h-10 px-4 py-2",
