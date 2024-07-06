@@ -56,6 +56,46 @@ function MainBody() {
 
   useLayoutEffect(handlePreloader, []);
 
+  const tabs = [
+    {
+      type: "about",
+      text: "Welcome to Afterland, an immersive play-to-earn experience set in a post-apocalyptic cyberpunk world.",
+    },
+    {
+      type: "about",
+      text: "Developed within the Telegram Web App on the TON blockchain.",
+    },
+    {
+      type: "about",
+      text: "Afterland offers a unique fusion of farming simulation and sci-fi adventure.",
+    },
+    {
+      type: "default",
+      text: "SESSION NUMBER 9225654",
+    },
+    {
+      type: "default",
+      text: "NEW USER WELCOME",
+    },
+    {
+      type: "default",
+      text: "WRITE YOUR NICKNAME",
+    },
+    {
+      type: "default",
+      text: (
+        <TypingAnimation
+          text="// BIG FAT CYBER PUNK COW"
+          className="text-xs xl:text-lg 2xl:text-xl font-medium text-white text-left"
+        />
+      ),
+    },
+    {
+      type: "default",
+      text: "LET’s START THIS COMPETITION",
+    },
+  ];
+
   return (
     <>
       <Preloader
@@ -77,49 +117,21 @@ function MainBody() {
           </h2>
 
           <div className="flex relative w-full">
-            <div
-              className={`${
-                active ? "opacity-100" : "opacity-0 pointer-events-none"
-              } flex-col gap-10 transition-all duration-1000 absolute left-0 bottom-0`}
-            >
-              <ul className="cyberpunk space-y-3.5">
-                <li className="text-xs xl:text-lg font-medium text-[#8E8E8E]">
-                  Welcome to Afterland, an immersive play-to-earn experience set
-                  in a post-apocalyptic cyberpunk world.
-                </li>
-                <li className="text-xs xl:text-lg font-medium text-[#8E8E8E]">
-                  Developed within the Telegram Web App on the TON blockchain.
-                </li>
-                <li className="text-xs xl:text-lg font-medium text-[#8E8E8E]">
-                  Afterland offers a unique fusion of farming simulation and
-                  sci-fi adventure.
-                </li>
-              </ul>
-            </div>
-
-            <ul
-              className={`${
-                active ? "opacity-0 pointer-events-none" : "opacity-100"
-              }  space-y-1 sm:space-y-2 transition-all duration-700`}
-            >
-              <li className="text-xs xl:text-lg 2xl:text-xl font-medium text-[#8E8E8E]">
-                SESSION NUMBER 9225654
-              </li>
-              <li className="text-xs xl:text-lg 2xl:text-xl font-medium text-[#8E8E8E]">
-                NEW USER WELCOME
-              </li>
-              <li className="text-xs xl:text-lg 2xl:text-xl font-medium text-[#8E8E8E]">
-                WRITE YOUR NICKNAME
-              </li>
-              <li>
-                <TypingAnimation
-                  text="// BIG FAT CYBER PUNK COW"
-                  className="text-xs xl:text-lg 2xl:text-xl font-medium text-white text-left"
-                />
-              </li>
-              <li className="text-xs xl:text-lg 2xl:text-xl font-medium text-[#8E8E8E]">
-                LET’s START THIS COMPETITION
-              </li>
+            <ul className="space-y-3.5">
+              {tabs.map((item) => (
+                <>
+                  {item.type === "about" && active ? (
+                    <li className="text-xs xl:text-lg 2xl:text-xl font-medium text-[#8E8E8E]">
+                      {item.text}
+                    </li>
+                  ) : null}
+                  {item.type === "default" && active === false ? (
+                    <li className="text-xs xl:text-lg 2xl:text-xl font-medium text-[#8E8E8E]">
+                      {item.text}
+                    </li>
+                  ) : null}
+                </>
+              ))}
             </ul>
           </div>
         </div>
