@@ -7,6 +7,8 @@ import { useMediaQuery } from "usehooks-ts";
 import { MainMoo } from "./main-moo";
 
 const MBackground = () => {
+  const isXL = useMediaQuery("(max-width:1536px)");
+  const isTablet = useMediaQuery("(max-width:1024px)");
   const isSmall = useMediaQuery("(max-width:735px)");
   return (
     <div
@@ -39,14 +41,8 @@ const MBackground = () => {
           {/* <Glitch /> */}
         </EffectComposer>
 
-        <Center position-x={isSmall ? 0 : -0.66} position-y={-0.25}>
-          {isSmall ? (
-            <Float>
-              <MainMoo />
-            </Float>
-          ) : (
-            <MainMoo />
-          )}
+        <Center position-x={isSmall ? 0 : isTablet ? -0.33 : -0.66}>
+          <MainMoo />
         </Center>
       </Canvas>
     </div>

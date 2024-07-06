@@ -19,11 +19,12 @@ export function MainMoo(props: JSX.IntrinsicElements["group"]) {
   const model = useRef<any>(null);
 
   const { nodes } = useGLTF("/model/korova.glb") as GLTFResult;
+
+  const isXL = useMediaQuery("(max-width:1536px)");
+  const isTablet = useMediaQuery("(max-width:1024px)");
   const isSmall = useMediaQuery("(max-width:735px)");
 
   useEffect(() => {
-    if (isSmall) return;
-
     const handleMouseMove = (event: any) => {
       mouse.current.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse.current.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -35,19 +36,21 @@ export function MainMoo(props: JSX.IntrinsicElements["group"]) {
       window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
-
+  const seperate = isSmall ? 0 : isTablet ? -0.33 : -0.66;
   useFrame((state) => {
-    if (model.current && !isSmall) {
+    if (model.current) {
       const { x, y } = mouse.current;
-
-      const vector = new THREE.Vector3(x, y, 0.5).unproject(state.camera);
-
+      const init = new THREE.Vector3(0, 0, 0.5);
+      const vector = new THREE.Vector3(x - seperate / 2, y, 0.5).unproject(
+        state.camera
+      );
       const dir = vector.sub(state.camera.position).normalize();
       const distance = -state.camera.position.z / dir.z;
       const pos = state.camera.position
         .clone()
         .add(dir.multiplyScalar(distance));
-      setTimeout(model.current.lookAt(pos), 50);
+
+      model.current.lookAt(init.lerp(pos, 0.4));
     }
   });
 

@@ -52,7 +52,7 @@ function MainBody() {
   const handlePreloader = useDebounceCallback(() => {
     setLoaded(true);
   }, 5000);
-  const handleToggle = useDebounceCallback(toggle, 5000);
+  const handleToggle = useDebounceCallback(toggle, 15000);
 
   useLayoutEffect(handlePreloader, []);
 
@@ -72,7 +72,7 @@ function MainBody() {
           <div className="side left w-3.5 h-40 lg:h-48 xl:h-72 2xl:h-80 absolute left-0 top-1/2 -translate-y-1/2" />
           <div className="side right w-3 h-40 lg:h-48 xl:h-72 2xl:h-80 absolute right-0 top-1/2 -translate-y-1/2" />
 
-          <h2 className="cyberpunk glitched font-bold pb-2 sm:pb-3.5 lg:pb-4 2xl:pb-8 text-sm lg:text-base xl:text-2xl 2xl:text-4xl">
+          <h2 className="cyberpunk glitched font-bold pb-5 lg:pb-6 2xl:pb-8 text-sm lg:text-base xl:text-2xl 2xl:text-4xl">
             {"// running afterland soft 0898.4356.6432.3432"}
           </h2>
 
@@ -138,10 +138,10 @@ function MainBody() {
           <div className="flex flex-nowrap items-center gap-4 mt-5">
             <Button
               size="sm"
-              className="rounded-none w-full h-max lg:h-10 xl:h-14 2xl:h-16 justify-center items-center gap-2 2xl:gap-4 text-left"
+              className="rounded-none w-full h-max lg:h-12 xl:h-14 2xl:h-16 justify-center items-center gap-2 2xl:gap-4 text-left"
               onClick={() => push("https://t.me/afterlandTON")}
             >
-              <FaTelegramPlane />
+              <FaTelegramPlane size={16} />
               <span>
                 <span aria-hidden className="button-primary-glitch">
                   :Telegram_:
@@ -151,10 +151,10 @@ function MainBody() {
             </Button>
             <Button
               size="sm"
-              className="rounded-none w-full h-max lg:h-10 xl:h-14 2xl:h-16 justify-center items-center gap-2 2xl:gap-4 text-left"
+              className="rounded-none w-full h-max lg:h-12 xl:h-14 2xl:h-16 justify-center items-center gap-2 2xl:gap-4 text-left"
               onClick={() => push("https://x.com/afterlandton")}
             >
-              <RiTwitterXFill />
+              <RiTwitterXFill size={16} />
               <span aria-hidden className="button-primary-glitch">
                 x (TWITTER)
               </span>

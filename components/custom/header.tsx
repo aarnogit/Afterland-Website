@@ -13,7 +13,7 @@ const Header = () => {
   const { toggle } = useAboutSectionStore();
   const { push } = useRouter();
 
-  const handleToggle = useDebounceCallback(toggle, 5000);
+  const handleToggle = useDebounceCallback(toggle, 15000);
 
   return (
     <header className="relative z-50 flex justify-between items-center w-full min-h-max header md:py-5 xl:py-10 backdrop-blur-xl">
@@ -48,14 +48,14 @@ const Header = () => {
               variant="invisible"
               onClick={() => push("https://t.me/afterlandTON")}
             >
-              <FaTelegramPlane />
+              <FaTelegramPlane size={16} />
             </Button>
             <Button
               size="sm"
               variant="invisible"
               onClick={() => push("https://x.com/afterlandton")}
             >
-              <RiTwitterXFill />
+              <RiTwitterXFill size={16} />
             </Button>
           </div>
         </div>
