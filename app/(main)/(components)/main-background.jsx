@@ -61,7 +61,7 @@ const MBackground = () => {
 
         <Center
           position-x={isSmall ? 0 : isTablet ? -0.33 : -0.66}
-          position-y={isSmall ? -0.25 : 0}
+          position-y={isSmall ? -0.2 : 0}
         >
           {isSmall ? (
             <Float
