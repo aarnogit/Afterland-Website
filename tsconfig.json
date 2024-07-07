@@ -32,6 +32,6 @@
     "lib/lax.js",
     "lib/laxPresets.js",
     "app/(main)/(components)/shadered-moo.jsx"
-  ],
+, "app/(main)/(components)/main-background.jsx"  ],
   "exclude": ["node_modules"]
 }
