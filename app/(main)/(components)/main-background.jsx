@@ -48,14 +48,15 @@ const MBackground = () => {
           <N8AO aoRadius={0.2} intensity={0.2} />
           <TiltShift2 blur={0.07} />
 
-          <ChromaticAberration offset={[0.001, 0.002]} />
+          <ChromaticAberration offset={[0.01, 0.025]} />
           <Glitch
-            delay={[0.5, 35]}
+            delay={[0, 8]}
             duration={[0.2, 1.0]}
-            strength={[0.05, 0.14]}
-            mode={GlitchMode.SPORADIC} // try CONSTANT_MILD
+            strength={[0.01, 0.04]}
+            mode={GlitchMode.DISABLED} // try CONSTANT_MILD
             active // toggle on/off
-            ratio={0.05}
+            columns={0.02}
+            ratio={0.4}
           />
         </EffectComposer>
 
