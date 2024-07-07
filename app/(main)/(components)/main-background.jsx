@@ -52,7 +52,7 @@ const MBackground = () => {
             offset={isSmall ? [0.01, 0.025] : [0, 0.005]}
           />
           <Glitch
-            delay={[0, 8]}
+            delay={[0, 35]}
             duration={[0.2, 1.0]}
             strength={[0.01, 0.01]}
             mode={GlitchMode.DISABLED} // try CONSTANT_MILD
