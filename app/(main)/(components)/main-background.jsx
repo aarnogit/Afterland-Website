@@ -21,7 +21,7 @@ const MBackground = () => {
   const isSmall = useMediaQuery("(max-width:735px)");
   return (
     <div
-      className="fixed left-0 top-0 h-screen w-screen pointer-events-none z-50"
+      className="fixed left-0 top-0 h-full min-h-dvh w-screen pointer-events-none z-50"
       style={{
         background: "#000 url('/background.svg') center center no-repeat",
         backgroundSize: "cover",
