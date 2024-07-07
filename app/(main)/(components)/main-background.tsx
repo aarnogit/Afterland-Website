@@ -2,9 +2,18 @@
 
 import { Center, Float } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { EffectComposer, N8AO, TiltShift2 } from "@react-three/postprocessing";
+import {
+  ChromaticAberration,
+  EffectComposer,
+  Glitch,
+  N8AO,
+  TiltShift2,
+} from "@react-three/postprocessing";
+import { GlitchMode } from "postprocessing";
+
 import { useMediaQuery } from "usehooks-ts";
 import { MainMoo } from "./main-moo";
+import { Vector2 } from "three";
 
 const MBackground = () => {
   const isXL = useMediaQuery("(max-width:1536px)");
@@ -37,12 +46,34 @@ const MBackground = () => {
         <ambientLight intensity={2} />
         <EffectComposer>
           <N8AO aoRadius={0.2} intensity={0.2} />
-          <TiltShift2 blur={0} />
-          {/* <Glitch /> */}
+          <TiltShift2 blur={0.07} />
+
+          <ChromaticAberration offset={[0.001, 0.002]} />
+          <Glitch
+            delay={[0.5, 35]}
+            duration={[0.2, 1.0]}
+            strength={[0.05, 0.14]}
+            mode={GlitchMode.SPORADIC} // try CONSTANT_MILD
+            active // toggle on/off
+            ratio={0.05}
+          />
         </EffectComposer>
 
-        <Center position-x={isSmall ? 0 : isTablet ? -0.33 : -0.66}>
-          <MainMoo />
+        <Center
+          position-x={isSmall ? 0 : isTablet ? -0.33 : -0.66}
+          position-y={isSmall ? -0.25 : 0}
+        >
+          {isSmall ? (
+            <Float
+              speed={0.6} // Animation speed, defaults to 1
+              rotationIntensity={1.5} // XYZ rotation intensity, defaults to 1
+              floatIntensity={0.4} // Up/down float intensity, works like a multiplier with floatingRange,defaults to 1
+            >
+              <MainMoo />
+            </Float>
+          ) : (
+            <MainMoo />
+          )}
         </Center>
       </Canvas>
     </div>

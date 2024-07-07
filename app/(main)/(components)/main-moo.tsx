@@ -25,6 +25,8 @@ export function MainMoo(props: JSX.IntrinsicElements["group"]) {
   const isSmall = useMediaQuery("(max-width:735px)");
 
   useEffect(() => {
+    if (isSmall) return;
+
     const handleMouseMove = (event: any) => {
       mouse.current.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse.current.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -38,7 +40,7 @@ export function MainMoo(props: JSX.IntrinsicElements["group"]) {
   }, []);
   const seperate = isSmall ? 0 : isTablet ? -0.33 : -0.66;
   useFrame((state) => {
-    if (model.current) {
+    if (model.current && !isSmall) {
       const { x, y } = mouse.current;
       const init = new THREE.Vector3(0, 0, 0.5);
       const vector = new THREE.Vector3(x - seperate / 2, y, 0.5).unproject(
