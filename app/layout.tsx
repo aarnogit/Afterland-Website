@@ -4,8 +4,31 @@ import MBackground from "./(main)/(components)/main-background";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "AFTERLAND",
-  description: "AFTERLAND",
+  title: "Afterland, play-to-earn experience set in a post-apocalyptic world.",
+  description:
+    "Improve your shelter, discover new plants and evolve with other survivors!",
+  twitter: {
+    title:
+      "Afterland, play-to-earn experience set in a post-apocalyptic world.",
+    card: "summary_large_image",
+    images: "/metatag.png",
+    description:
+      "Improve your shelter, discover new plants and evolve with other survivors!",
+  },
+  keywords: ["TON", "AFTHERLAND", "Play-To-earn"],
+  openGraph: {
+    type: "website",
+    title:
+      "Afterland, play-to-earn experience set in a post-apocalyptic world.",
+    description:
+      "Improve your shelter, discover new plants and evolve with other survivors!",
+    url: "/metatag.png",
+  },
+  appleWebApp: {
+    title:
+      "Afterland, play-to-earn experience set in a post-apocalyptic world.",
+    statusBarStyle: "black-translucent",
+  },
 };
 
 export default function RootLayout({

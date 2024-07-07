@@ -42,6 +42,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <Link
         href={href}
         className={cn(buttonVariants({ variant, size, className }))}
+        target="_blank"
+        rel="noopener noreferrer"
       >
         <Comp ref={ref} {...props} />
       </Link>
@@ -54,6 +56,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     );
   }
 );
+
 Button.displayName = "Button";
 
 export { Button, buttonVariants };

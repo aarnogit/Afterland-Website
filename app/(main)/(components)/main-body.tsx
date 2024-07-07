@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { header_menu_data } from "@/lib/constants";
 import { useAboutSectionStore } from "@/stores/general.store";
 import { PlusIcon } from "lucide-react";
-import { useLayoutEffect, useState } from "react";
+import { Fragment, useLayoutEffect, useState } from "react";
 import { useDebounceCallback } from "usehooks-ts";
 import { useRouter } from "next/navigation";
 
@@ -34,7 +34,7 @@ const Preloader = ({ className }: { className: string }) => (
           <div className="flex items-center gap-2">
             <span className="exclamation">!</span>
             <BoxReveal boxColor={"#0000ff"} duration={0.5}>
-              <span>CAUTION, Do not turn off.</span>
+              <span className="text-xs">CAUTION, Do not turn off.</span>
             </BoxReveal>
           </div>
           <div id="line-cascates"></div>
@@ -151,7 +151,7 @@ function MainBody() {
             <Button
               size="sm"
               className="rounded-none w-full h-max lg:h-12 xl:h-14 2xl:h-16 justify-center items-center gap-2 2xl:gap-4 text-left"
-              onClick={() => push("https://t.me/afterlandTON")}
+              href="https://t.me/afterlandTON"
             >
               <FaTelegramPlane size={16} />
               <span>
@@ -164,7 +164,7 @@ function MainBody() {
             <Button
               size="sm"
               className="rounded-none w-full h-max lg:h-12 xl:h-14 2xl:h-16 justify-center items-center gap-2 2xl:gap-4 text-left"
-              onClick={() => push("https://x.com/afterlandton")}
+              href="https://x.com/afterlandton"
             >
               <RiTwitterXFill size={16} />
               <span aria-hidden className="button-primary-glitch">
@@ -178,33 +178,45 @@ function MainBody() {
         <div className="flex flex-col gap-4 w-full">
           <div className="flex gap-5 w-full justify-between items-center flex-nowrap">
             {header_menu_data.map((item) => (
-              <Button
-                variant="pluses"
-                size="sm"
-                className="relative flex lg:hidden w-full"
-                key={`header-navigation--${item}`}
-                onClick={
-                  item.toLocaleLowerCase() === "about"
-                    ? () => {
-                        toggle();
-                        handleToggle();
-                      }
-                    : () => push("https://t.me/lavandadva")
-                }
-              >
-                <PlusIcon className="w-3 h-3 text-white/30 absolute top-1 left-1" />
-                <PlusIcon className="w-3 h-3 text-white/30 absolute top-1 right-1" />
-                <PlusIcon className="w-3 h-3 text-white/30 absolute bottom-1 left-1" />
-                <PlusIcon className="w-3 h-3 text-white/30 absolute bottom-1 right-1" />
-                <span>:{item.toLocaleLowerCase()}:</span>
-              </Button>
+              <Fragment key={`header-navigation--${item}`}>
+                {item.toLocaleLowerCase() === "about" ? (
+                  <Button
+                    variant="pluses"
+                    size="sm"
+                    className="relative flex lg:hidden w-full"
+                    onClick={() => {
+                      toggle();
+                      handleToggle();
+                    }}
+                  >
+                    <PlusIcon className="w-3 h-3 text-white/30 absolute top-1 left-1" />
+                    <PlusIcon className="w-3 h-3 text-white/30 absolute top-1 right-1" />
+                    <PlusIcon className="w-3 h-3 text-white/30 absolute bottom-1 left-1" />
+                    <PlusIcon className="w-3 h-3 text-white/30 absolute bottom-1 right-1" />
+                    <span>:{item.toLocaleLowerCase()}:</span>
+                  </Button>
+                ) : (
+                  <Button
+                    variant="pluses"
+                    size="sm"
+                    className="relative flex lg:hidden w-full"
+                    href="https://t.me/lavandadva"
+                  >
+                    <PlusIcon className="w-3 h-3 text-white/30 absolute top-1 left-1" />
+                    <PlusIcon className="w-3 h-3 text-white/30 absolute top-1 right-1" />
+                    <PlusIcon className="w-3 h-3 text-white/30 absolute bottom-1 left-1" />
+                    <PlusIcon className="w-3 h-3 text-white/30 absolute bottom-1 right-1" />
+                    <span>:{item.toLocaleLowerCase()}:</span>
+                  </Button>
+                )}
+              </Fragment>
             ))}
           </div>
 
           <Button
             size="sm"
             className="flex md:hidden rounded-none justify-start text-left relative z-20 w-full h-12 px-10"
-            onClick={() => push("https://t.me/Afterland_Bot")}
+            href="https://t.me/Afterland_Bot"
           >
             <PlusIcon className="w-3 h-3 text-white/30 absolute top-2 left-3" />
             <PlusIcon className="w-3 h-3 text-white/30 absolute top-3 right-2.5" />

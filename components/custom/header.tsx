@@ -1,13 +1,14 @@
 "use client";
 import { header_menu_data } from "@/lib/constants";
+import { useAboutSectionStore } from "@/stores/general.store";
 import { PlusIcon } from "lucide-react";
-import { Button } from "../ui/button";
-import Logo from "./logo";
+import { useRouter } from "next/navigation";
 import { FaTelegramPlane } from "react-icons/fa";
 import { RiTwitterXFill } from "react-icons/ri";
-import { useAboutSectionStore } from "@/stores/general.store";
 import { useDebounceCallback } from "usehooks-ts";
-import { usePathname, useRouter } from "next/navigation";
+import { Button } from "../ui/button";
+import Logo from "./logo";
+import { Fragment } from "react";
 
 const Header = () => {
   const { toggle } = useAboutSectionStore();
@@ -21,31 +22,46 @@ const Header = () => {
         <Logo />
         <div className="relative flex justify-between items-center w-max md:gap-5 xl:gap-10 pr-0 md:pr-5 lg:pr-10">
           {header_menu_data.map((item) => (
-            <Button
-              variant="pluses"
-              size="sm"
-              className="relative hidden lg:flex"
-              key={`header-navigation--${item}`}
-              onClick={
-                item.toLocaleLowerCase() === "about"
-                  ? () => {
-                      toggle();
-                      handleToggle();
-                    }
-                  : () => push("https://t.me/lavandadva")
-              }
-            >
-              <PlusIcon className="w-3 h-3 text-white/30 absolute -top-1 -left-1" />
-              <PlusIcon className="w-3 h-3 text-white/30 absolute -top-1 -right-1" />
-              <PlusIcon className="w-3 h-3 text-white/30 absolute -bottom-1 -left-1" />
-              <PlusIcon className="w-3 h-3 text-white/30 absolute -bottom-1 -right-1" />
-              <span>:{item.toLocaleLowerCase()}:</span>
-            </Button>
+            <Fragment key={`header-navigation--${item}`}>
+              {item.toLocaleLowerCase() === "about" ? (
+                <Button
+                  variant="pluses"
+                  size="sm"
+                  className="relative hidden lg:flex"
+                  key={`header-navigation--${item}`}
+                  onClick={() => {
+                    toggle();
+                    handleToggle();
+                  }}
+                >
+                  <PlusIcon className="w-3 h-3 text-white/30 absolute -top-1 -left-1" />
+                  <PlusIcon className="w-3 h-3 text-white/30 absolute -top-1 -right-1" />
+                  <PlusIcon className="w-3 h-3 text-white/30 absolute -bottom-1 -left-1" />
+                  <PlusIcon className="w-3 h-3 text-white/30 absolute -bottom-1 -right-1" />
+                  <span>:{item.toLocaleLowerCase()}:</span>
+                </Button>
+              ) : (
+                <Button
+                  variant="pluses"
+                  size="sm"
+                  className="relative hidden lg:flex"
+                  key={`header-navigation--${item}`}
+                  href="https://t.me/lavandadva"
+                >
+                  <PlusIcon className="w-3 h-3 text-white/30 absolute -top-1 -left-1" />
+                  <PlusIcon className="w-3 h-3 text-white/30 absolute -top-1 -right-1" />
+                  <PlusIcon className="w-3 h-3 text-white/30 absolute -bottom-1 -left-1" />
+                  <PlusIcon className="w-3 h-3 text-white/30 absolute -bottom-1 -right-1" />
+                  <span>:{item.toLocaleLowerCase()}:</span>
+                </Button>
+              )}
+            </Fragment>
           ))}
           <div className="flex lg:hidden flex-nowrap items-center gap-4">
             <Button
               size="sm"
               variant="invisible"
+              href="https://t.me/afterlandTON"
               onClick={() => push("https://t.me/afterlandTON")}
             >
               <FaTelegramPlane size={16} />
@@ -53,7 +69,7 @@ const Header = () => {
             <Button
               size="sm"
               variant="invisible"
-              onClick={() => push("https://x.com/afterlandton")}
+              href="https://x.com/afterlandton"
             >
               <RiTwitterXFill size={16} />
             </Button>
@@ -63,7 +79,7 @@ const Header = () => {
       <Button
         size="sm"
         className="hidden md:flex rounded-none justify-start text-left relative z-20 w-max min-w-40 lg:min-w-52 px-10"
-        onClick={() => push("https://t.me/Afterland_Bot")}
+        href="https://t.me/Afterland_Bot"
       >
         <PlusIcon className="w-3 h-3 text-white/30 absolute top-2 left-3" />
         <PlusIcon className="w-3 h-3 text-white/30 absolute top-2 right-2.5" />
